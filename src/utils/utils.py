@@ -65,7 +65,7 @@ def outlier_overview(dataframe: pd.DataFrame, column_name: str, cat_col: Optiona
     return stats
 
 
-def export_data(dataframe: pd.DataFrame, name: str) -> None:
+def export_data(dataframe: pd.DataFrame, dir_name: str, name: str) -> None:
     """
     Exports a DataFrame to a CSV file in the 'data/export' directory.
 
@@ -80,7 +80,7 @@ def export_data(dataframe: pd.DataFrame, name: str) -> None:
     # Define the export directory path
     current_path = Path(__file__)
     root_path = current_path.parent.parent.parent
-    export_dir = root_path / DATA_DIR / "export"
+    export_dir = root_path / DATA_DIR / dir_name
     export_dir.mkdir(parents=True, exist_ok=True)  # Create the directory if it doesn't exist
 
     # Construct the full file path
@@ -94,9 +94,9 @@ def export_data(dataframe: pd.DataFrame, name: str) -> None:
         raise RuntimeError(f"Failed to export data to {file_path}") from e
 
 
-def prepare_segment_trends_data(dataframe: pd.DataFrame) -> pd.DataFrame:
+def remove_outliers(dataframe: pd.DataFrame) -> pd.DataFrame:
     """
-    Prepares the dataset for analyzing segment trends and insights by:
+    Removes outliers by:
     1. Filling missing values in the 'extended_upto' column with 0 where 'extended_memory_available' is 0.
     2. Removing smartphones with a price greater than ₹2,00,000.
 
