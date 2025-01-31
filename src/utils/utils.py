@@ -71,6 +71,7 @@ def export_data(dataframe: pd.DataFrame, dir_name: str, name: str) -> None:
 
     Args:
         dataframe (pd.DataFrame): The DataFrame to be exported.
+        dir_name (str): Subdirectory type (e.g., 'raw', 'processed').
         name (str): Name of the file (without extension).
 
     Returns:
