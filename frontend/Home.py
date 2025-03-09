@@ -26,7 +26,7 @@ def main():
         st.stop()
 
     # Hero Section
-    st.title("📱 Understand & Predict Smartprix Ratings")
+    st.title("📱 Understand & Predict Smartprix Ratings - Test1 ")
     st.subheader(
         "Gain insights into how smartphone features impact specification scores and optimize your designs."
     )
