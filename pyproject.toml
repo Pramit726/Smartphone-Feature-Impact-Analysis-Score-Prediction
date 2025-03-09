@@ -1,11 +1,15 @@
 [project]
-name = "src"
+name = "ml"
 version = "0.0.1"
-description = "A data science project analyzing smartphone trends and features across market segments."
+description = "API for predicting and interpreting smartphone specification ratings."
 authors = [{name = "Pramit De", email = "pramitde726@gmail.com"}]
 
 [tool.setuptools]
-packages = {find = {}}
+packages = {find = {include = ["ml"]}} 
 
 [tool.setuptools.dynamic]
 dependencies = {file = "requirements.txt"}
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
