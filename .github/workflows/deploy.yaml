@@ -80,10 +80,6 @@ jobs:
             echo "frontend_changed=true" >> $GITHUB_ENV  # Assume changes on first commit
           fi
 
-      - name: Debug - List Repository Files
-        if: env.frontend_changed == 'true'
-        run: ls -R
-
       - name: Log in to DockerHub
         if: env.frontend_changed == 'true'
         uses: docker/login-action@v2
