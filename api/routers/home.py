@@ -5,11 +5,12 @@ from ..schemas import ShowInsights
 
 router = APIRouter(prefix="/home", tags=["Home"])
 
+
 @router.get(
     "/",
     status_code=status.HTTP_200_OK,
     response_model=ShowInsights,
-    summary="Get Home Page Insights",
+    summary="Get Home Page Insights -test 6",
     description="Retrieves insights for the home page.",
 )
 async def get_home_info():
