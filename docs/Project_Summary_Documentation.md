@@ -68,5 +68,5 @@ Higher Smartprix ratings increase visibility and perceived value, potentially bo
   - External influences such as market trends, customer reviews, or competitor strategies are not considered.
   - Predictions are limited to the accuracy of the input data and model assumptions.
 - **Scalability:**
-  - As a proof-of-concept (PoC) project, the web application is hosted on Streamlit Cloud and may not support large-scale production deployment without further optimization.
+  - As a proof-of-concept (PoC) project, the web application is hosted on Render Cloud and may not support large-scale production deployment without further optimization.
 

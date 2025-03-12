@@ -1,4 +1,4 @@
-# Technical Documentation: Smartphone Specification Analysis
+# Technical Documentation: 
 
 ## 1. Requirements Gathering
 
@@ -27,89 +27,53 @@
 3. Hypothetical Device Scoring:
    - Allow users to input custom feature values for a new smartphone and generate its predicted score.
 4. Data Handling:
-   - Ingest, preprocess, and validate smartphone specification data.
+   - Ingest and preprocess smartphone specification data.
    - Handle missing values, normalize numerical features, and encode categorical ones.
 5. Web Application Integration:
    - Host a user-friendly interface for stakeholders to input features, view predictions, and explore interpretability results.
-6. Model Evaluation and Continuous Learning:
+6. Model Evaluation:
    - Evaluate model performance with metrics like R² and MAE.
 
 ### C. Non-functional Requirements
 
-1. Scalability:
-   - Ensure the system can handle large datasets with hundreds of features and thousands of data points.
-2. Performance:
+1. Performance:
    - Predictions should be generated in under 2 seconds to ensure seamless interaction in the web application.
-3. Reliability:
+2. Reliability:
    - The system should provide consistent results across multiple runs, with minimal variance.
-4. Interpretability:
+3. Interpretability:
    - The outputs must be easily understandable by non-technical stakeholders, with visual aids like bar charts or plots.
-5. Maintainability:
+4. Maintainability:
    - Use modular and well-documented code to enable easy updates and debugging.
-6. Usability:
+5. Usability:
    - Provide an intuitive interface for non-technical users, focusing on simplicity and clarity.
 
 ## 2. Architecture Planning
 
 ### High-Level Architecture
 
-1. Data Collection Layer:
+Below is the high level architecture overview:
 
-   - **Purpose**: Collect data on smartphone specifications and corresponding Smartprix scores.
-   - **Components**:
-     - Data sources: APIs, databases, or web scraping tools to collect data from platforms like Smartprix or manufacturer websites.
-     - Pre-processing pipeline: A script or framework to clean, transform, and validate raw data.
-   - **Why**: Ensures the input data is accurate, consistent, and ready for modeling. Reliable data forms the foundation of a trustworthy system.
+<p align="center">
+  <img src="./assets/high_level_overview.jpeg" alt="High Level Architecture Overview" width="300">
+</p>
 
-2. Data Storage Layer:
+**Figure: High-Level Architecture Overview illustrating the data flow from ingestion to real-time inference and explainability**
 
-   - **Purpose**: Store pre-processed smartphone specification data and Smartprix scores.
-   - **Components**:
-     - Technology: PostgreSQL for structured data storage.
-   - **Why PostgreSQL**:
-     - PostgreSQL is ideal for storing tabular data such as smartphone features and specification scores.
-     - Offers powerful querying capabilities and ensures data consistency, essential for reliable predictions.
 
-3. Modeling and Analytics Layer:
+### Technology Stack & Justifications
 
-   - **Purpose**: Train regression models to predict specification scores and provide interpretability.
-   - **Components**:
-     - ML models: Techniques like Linear Regression, Random Forests, or XGBoost for accurate and interpretable predictions.
-     - Interpretability tools: SHAP (SHapley Additive exPlanations) for feature importance analysis.
-   - **Why**:
-     - Regression models provide accurate predictions for continuous outputs like specification scores.
-     - SHAP enhances stakeholder trust by explaining why specific features drive certain scores.
+| Component            | Technology Choices                         | Justification |
+|----------------------|-------------------------------------------|--------------|
+| **Data Ingestion**   | Local Storage (CSV)                      | Since this is a PoC with limited data, local storage is sufficient. Can be extended to a database if needed. |
+| **Feature Engineering** | pandas, scikit-learn                   | Efficient libraries for handling numerical & categorical features. |
+| **Model Training**   | XGBoost / LightGBM / Scikit-learn         | Suitable for structured data with numerical and categorical features. Provides fast training and high interpretability. |
+| **Model Registry**   | MLflow                                    | Tracks experiments, manages models, and supports versioning. |
+| **Model Deployment** | FastAPI + Uvicorn                         | Lightweight, scalable API framework for real-time inference. |
+| **Inference**        | FastAPI Endpoints                         | Ensures real-time predictions with low latency. |
+| **Explainability**   | SHAP                                      | Helps interpret model decisions, improving transparency. |
+| **Web Interface**    | Streamlit                                 | Interactive UI for user input, visualization, and displaying model results. |
 
-4. Application Layer:
 
-   - **Purpose**: Provide a user-friendly interface for stakeholders to interact with the model.
-   - **Components**:
-     - Technology: Streamlit for the web application.
-   - **Why Streamlit**:
-     - Rapid prototyping and deployment of interactive dashboards.
-     - Minimal development effort to create visually appealing interfaces for stakeholders.
-     - Built-in widgets for input forms, graphs, and tables to simplify user interaction.
-
-5. Deployment Layer:
-
-   - **Purpose**: Host the application and make it accessible to stakeholders.
-   - **Components**:
-     - Technology: Streamlit Cloud for hosting the web application.
-   - **Why Streamlit Cloud**:
-     - Streamlined and cost-effective solution for hosting proof-of-concept (PoC) projects.
-     - Eliminates infrastructure setup overhead, allowing focus on app functionality.
-     - Optimized for Streamlit apps, ensuring seamless deployment and easy sharing of results with stakeholders.
-
-### Technology Choices
-
-| **Layer**              | **Technology**        | **Why Chosen**                                                                      |
-| ---------------------- | --------------------- | ----------------------------------------------------------------------------------- |
-| Data Preprocessing     | Pandas, Scikit-learn  | Comprehensive tools for data cleaning, feature engineering, and transformation.     |
-| Modeling Frameworks    | Scikit-learn, XGBoost | Easy-to-use for regression tasks; XGBoost excels at capturing complex interactions. |
-| Interpretability Tools | SHAP                  | Provides actionable insights into feature importance.                               |
-| Database Choice        | PostgreSQL            | Strong relational database with excellent querying capabilities.                    |
-| Web Application        | Streamlit             | Simplifies building dashboards with minimal development effort.                     |
-| Deployment Platform    | Streamlit Cloud       | Cost-effective and optimized for Streamlit apps.                                    |
 
 ### Evaluation Strategy and Key Metrics
 
@@ -118,7 +82,7 @@
 | Modeling Frameworks    | Cross-validation, parameter tuning (grid search), and feature importance analysis.                  | R² (>0.8), MAE (±5 points).                  |
 | Interpretability Tools | Visual inspection of SHAP plots, stakeholder feedback on interpretability.                          | SHAP value consistency, usability.           |
 | Web Application        | Usability tests with stakeholders, app responsiveness checks.                                       | Interaction time (<2 seconds).               |
-| Deployment Platform    | Deployment time tracking, uptime monitoring.                                                        | Uptime percentage (>99%).                    |
+
 
 ### Key Metrics
 
@@ -126,7 +90,6 @@
 | ----------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | **R-Squared (R²)**            | Explains how much variance in scores is captured by the model.       | High R² (> 0.8) ensures reliability for strategic planning.             | "85% of score variance explained by smartphone features."          |
 | **Mean Absolute Error (MAE)** | Quantifies average deviation of predicted scores from actual scores. | Low MAE (±5 points) boosts trust in predictions for critical decisions. | "Predicted flagship score of 90 typically within 85-95."           |
-| **Feature Consistency**       | Measures interpretability tool consistency in feature ranking.       | Ensures actionable insights for design prioritization.                  | "Camera quality consistently ranks as top feature across devices." |
 | **Interaction Time**          | Measures web app responsiveness.                                     | Enhances user satisfaction with seamless interactions.                  | "Predictions generated within 1.5 seconds for 95% of inputs."      |
 
 ## 3. Data Pipeline Design
@@ -172,85 +135,90 @@ For a detailed data dictionary, refer to the [Data_Dictionary](../references/Mob
 - **BeautifulSoup**: Parses HTML for data extraction.
 - **Pandas**: Stores and exports data.
 
+## 4. Training Infrastructure
+
+### Model Selection Process
+
+### **Baseline Models**
+Before selecting a complex model, we evaluated simple baseline models:
+
+| Model               | Test Error | R² Score (Test) |
+|---------------------|-----------|----------------|
+| **Linear Regression** | 1.7349    | 0.9416         |
+| **Decision Tree**    | 1.8037    | 0.8749         |
+
+While **Linear Regression** performed better in terms of R² score, it lacked the flexibility to capture complex interactions. Decision Trees performed well but had higher variance.
+
+---
+
+### **Exploring More Advanced Models**
+After evaluating baseline models, we tested **all linear models, Random Forest, and Gradient Boosting**.
+
+#### **Performance Comparison**
+Both **Random Forest and Gradient Boosting** had **similar performance metrics**, but **Random Forest** was chosen due to its **higher interpretability** while maintaining competitive accuracy.
+
+---
+
+#### **Why Random Forest? (Key Considerations)**
+
+### **1. Data Size & Type**
+- The dataset consists of **structured numerical and categorical data** (smartphone specs).
+- **Random Forest** naturally handles categorical and numerical features **without requiring extensive preprocessing**.
+
+---
+
+### **2. Latency Requirements (Random Forest vs. Gradient Boosting)**
+Since **real-time inference** is required (FastAPI deployment), model inference speed is a crucial factor.
+
+| Model               | Inference Complexity |
+|---------------------|----------------------|
+| **Random Forest**   | (O(k log n)) |
+| **Gradient Boosting** | (O(k d)) |
+
+- **Random Forest:** Performs inference in **(O(k log n))** time, where \(k\) is the number of trees and \(n\) is the number of samples in each tree. Since trees are independent, inference can be parallelized, making it **faster** for real-time scenarios.
+- **Gradient Boosting:** Inference complexity is **\(O(k d)\)**, where \(d\) is the depth of each tree. Since boosting trees are applied sequentially, inference is inherently **slower** than Random Forest.
+- **Random Forest** provides a **better trade-off** between **accuracy and inference speed**, making it suitable for **low-latency** systems.
+
+---
+
+### **3. Interpretability Needs**
+- **SHAP (SHapley Additive Explanations)** can be used with **Random Forest** to explain feature importance.
+- **Feature importance scores** from **Random Forest** are easier to interpret **compared to boosting models**, where feature interactions are more complex.
+
 ## Deployment and Serving
 
-### Overview
+### Model Deployment Strategy
+We deploy the model for **real-time inference** using **FastAPI** due to:  
+- **Asynchronous Programming:** FastAPI efficiently handles multiple requests with `async` capabilities.  
+- **Pydantic Validation:** Ensures strict input data validation, reducing errors in API calls.  
+- **Performance:** Built on Starlette and Uvicorn, making it **faster than Flask** for handling high-concurrency requests.  
 
-The goal of this section is to outline the deployment process and the serving architecture for making the machine learning model accessible to stakeholders via a web application. This section details how the trained predictive model will be deployed, how real-time predictions will be provided, and how interpretability features will be integrated for feature analysis.
+### Scalability & Performance
+- **Hardware Requirements:**  
+  - Deployed on a **free instance (Render.com)**  
+  - **512MB RAM, 0.1 vCPU** (sufficient for low-load real-time inference)  
+- **Microservices Architecture:**  
+  - **Two microservices:**  
+    - **API Service (FastAPI + Model Inference)**  
+    - **Frontend Service (Streamlit UI)**  
+  - **Dockerized Deployment:** Each service is packaged as a **Docker container** for portability.  
+- **CI/CD Pipeline:**  
+  - **GitHub Actions** automates deployments when new code is pushed.  
 
-### Components
+### API Endpoints & Input/Output Schema
+Full API documentation & testing: [Postman Collection](https://crimson-equinox-345795.postman.co/workspace/My-Workspace~393a6c73-8b4d-435b-8c76-ad0f04e4d33b/collection/26974525-35da8e7e-fd28-42a2-bf07-f936d0729216?action=share&creator=26974525) 
 
-1. **Web Application Hosting**:
-   - **Platform**: Streamlit Cloud
-   - **Description**: The web application will be deployed on Streamlit Cloud to provide an interactive and user-friendly interface for stakeholders. Streamlit Cloud offers a simple and efficient deployment solution, ideal for proof-of-concept (PoC) projects, with minimal infrastructure overhead.
-   - **Functionality**: The web application will allow users to input hypothetical smartphone features and receive predicted Smartprix specification scores in real-time. Additionally, users will be able to view feature importance via SHAP (SHapley Additive exPlanations) visualizations to understand the contribution of each feature to the predicted score.
-   - **Reason for Selection**: Streamlit Cloud is ideal for PoC projects due to its simplicity, rapid deployment, and minimal configuration requirements. It supports Python-based machine learning models and provides built-in widgets for interactive user inputs.
+### Monitoring & Logging
+- Logging done through custom logging module.
+- Observability will be setup in the project in the next iteration.
 
-2. **Model Deployment**:
-   - **Serialization Format**: Pickle or Joblib
-   - **Description**: The trained predictive model will be serialized using Pickle or Joblib to facilitate its deployment. These formats allow the model to be stored efficiently and loaded quickly during inference.
-   - **Functionality**: Once serialized, the model will be loaded by the Streamlit application for real-time predictions. The model takes smartphone feature inputs, processes them, and outputs the predicted Smartprix specification score.
-   - **Reason for Selection**: Pickle and Joblib are widely used in Python-based machine learning workflows for model serialization. They support fast loading and make the deployment process seamless.
+### Deployment Infrastructure
 
-3. **Feature Interpretability**:
-   - **Library**: SHAP (SHapley Additive exPlanations)
-   - **Description**: SHAP will be integrated into the application to provide interpretability of the model's predictions. It will generate plots that show the contribution of each feature to the predicted specification score, helping stakeholders understand the impact of different features on the model’s output.
-   - **Functionality**: SHAP values will be computed for each prediction, and corresponding plots will be displayed on the web application. This helps stakeholders make data-driven decisions about feature prioritization for future smartphone designs.
-   - **Reason for Selection**: SHAP is a widely used library for model interpretability, providing reliable and easily understandable visual explanations of machine learning model predictions.
-
-4. **Real-Time Predictions**:
-   - **Platform**: Streamlit Widgets and Python Backend
-   - **Description**: The web application will allow stakeholders to input smartphone feature values via interactive widgets, such as sliders and text input fields. Once the features are provided, the model will predict the corresponding Smartprix specification score.
-   - **Functionality**: The application will utilize Streamlit's widget framework to capture user inputs, pass them to the model for inference, and display the predicted score in real time.
-   - **Reason for Selection**: Streamlit provides an efficient framework for building interactive dashboards with minimal code, making it easy to implement real-time model predictions.
-
-5. **Monitoring and Observability**:
-   - **Stack**: Prometheus-Grafana Stack
-   - **Description**: Prometheus and Grafana will be used to monitor the application’s performance, resource usage, and reliability. Prometheus will collect metrics, and Grafana will visualize them through interactive dashboards.
-   - **Functionality**: The monitoring stack will track key metrics such as response time, user interactions, and application uptime. Alerts will be configured for any anomalies or performance bottlenecks.
-   - **Reason for Selection**: Prometheus and Grafana are industry-standard tools for monitoring and observability, offering a robust solution for tracking application performance and ensuring high availability.
-
-### Deployment Process
-
-1. **Prepare the Environment**:
-   - **Streamlit Setup**: Create a Streamlit Cloud account and initialize the project repository on GitHub.
-   - **Dependencies**: List all necessary Python libraries in a `requirements.txt` file, including libraries for machine learning (e.g., `scikit-learn`, `xgboost`), data processing (e.g., `pandas`), and visualization (e.g., `shap`, `matplotlib`, `plotly`).
-   - **Model Serialization**: Serialize the trained model using Pickle or Joblib and save it to the project repository.
-
-2. **Code Deployment**:
-   - **Repository Hosting**: Host the project code and serialized model in a GitHub repository. This repository will contain the Streamlit app script, model file, and any auxiliary scripts required for data processing and model inference.
-   - **Streamlit Deployment**: Link the GitHub repository to Streamlit Cloud. Once connected, Streamlit Cloud will automatically deploy the application. Any updates pushed to the GitHub repository will trigger an automatic redeployment on Streamlit Cloud.
-
-3. **Web Application Interface**:
-   - **Input Widgets**: Use Streamlit's widgets (e.g., sliders, text boxes) to create an intuitive interface where users can input hypothetical smartphone features such as processor type, camera quality, and battery life.
-   - **Prediction Output**: After the user provides input, the model will generate a predicted Smartprix specification score, which will be displayed on the web application.
-   - **Feature Impact Visualization**: SHAP plots will be integrated into the interface to visually explain how each feature influences the predicted score.
-
-4. **Model Inference**:
-   - **Process**: When a user provides input, the Streamlit app will:
-     - Parse the input values and convert them into a format suitable for the model.
-     - Load the serialized model from the Pickle/Joblib file.
-     - Use the model to predict the Smartprix specification score based on the provided features.
-     - Display the predicted score and the corresponding SHAP value plot showing feature importance.
-
-5. **Monitoring and Maintenance**:
-   - **Future Monitoring**: Prometheus-Grafana stack will be used to monitor the application’s performance, uptime, and user interactions to ensure reliability and scalability in a production environment.
-   - **Model Updates**: If new data becomes available or if the model needs retraining, updates will be made to the model and the Streamlit application will be redeployed with the updated model.
-
-### Scalability Considerations
-
-- **For PoC**: The application is expected to handle a limited number of users, primarily internal stakeholders (product managers, analysts).
-- **For Future Expansion**: Should the project move to full-scale production, considerations for scaling the application will include moving to more robust cloud infrastructure (e.g., AWS, Google Cloud), optimizing model inference time, and potentially implementing load balancing for increased user traffic.
-
-### Summary of Deployment Architecture
-
-| **Component**             | **Technology**               | **Purpose**                                           |
-|---------------------------|------------------------------|-------------------------------------------------------|
-| **Web Application Hosting**  | Streamlit Cloud              | Host the interactive dashboard and allow real-time model interaction. |
-| **Model Deployment**         | Pickle/Joblib                | Serialize and load the trained model for inference.    |
-| **Feature Interpretability** | SHAP                         | Visualize the impact of each feature on the predicted score. |
-| **Real-Time Predictions**    | Streamlit Widgets, ML model  | Allow users to input features and receive predicted specification scores. |
-| **Monitoring and Observability** | Prometheus-Grafana Stack  | Monitor application performance, uptime, and user interactions. |
-
-
+| Component        | Technology Used            |
+|-----------------|---------------------------|
+| **Model Server** | FastAPI + Uvicorn         |
+| **Frontend**     | Streamlit                 |
+| **Deployment**   | Render.com (Free Instance) |
+| **CI/CD**       | GitHub Actions            |
+| **Containerization** | Docker                 |
 
