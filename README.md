@@ -48,7 +48,7 @@
 
 After scraping the data, I cleaned and structured it to ensure consistency, completeness, and accuracy. The following modifications were made:
 
-### 1.1 Quality Issues  
+### Quality Issues  
 - **Model**: Standardized brand names for consistency.  
 - **Price**: Removed '₹' symbol and commas for numerical validity.  
 - **Price**: Identified an anomaly where Namotel was priced at ₹99.  
@@ -67,7 +67,7 @@ After scraping the data, I cleaned and structured it to ensure consistency, comp
 - **Missing Values**: Addressed missing data in **camera, card, and OS** columns.  
 - **Data Types**: Converted **price** and **rating** columns to numerical types.  
 
-### 1.2 Tidiness Issues  
+### Tidiness Issues  
 - **SIM**: Split into `has_5G`, `has_NFC`, and `has_IR_Blaster`.  
 - **RAM**: Separated into `RAM` and `ROM`.  
 - **Processor**: Extracted `Processor Name`, `Cores`, and `CPU Speed`.  
