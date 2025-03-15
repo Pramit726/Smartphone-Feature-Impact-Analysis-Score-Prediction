@@ -158,7 +158,7 @@ Below are a few highlights of the EDA analysis :
 
 ## Model Interpretability
 
-To better understand model predictions, we used SHAP (SHapley Additive Explanations):
+To better understand model predictions, I used SHAP (SHapley Additive Explanations):
 
 ### Local Interpretability
 - SHAP force plot visualizes the contribution of each feature to an individual prediction.
