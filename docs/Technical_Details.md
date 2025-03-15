@@ -57,7 +57,7 @@ Below is the high level architecture overview:
   <img src="./assets/high_level_overview.jpeg" alt="High Level Architecture Overview" width="300">
 </p>
 
-**Figure: High-Level Architecture Overview illustrating the data flow from ingestion to real-time inference and explainability**
+*Figure: High-Level Architecture Overview illustrating the data flow from ingestion to real-time inference and explainability*
 
 
 ### Technology Stack & Justifications
