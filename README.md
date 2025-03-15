@@ -156,6 +156,23 @@ Below are a few highlights of the EDA analysis :
 | Random Forest (Untuned) | 1.1564     | 0.9535          |
 | Random Forest (Tuned)   | **1.0800** | **0.9549**      |
 
+## Model Interpretability
+
+To better understand model predictions, we used SHAP (SHapley Additive Explanations):
+
+### Local Interpretability
+- SHAP force plot visualizes the contribution of each feature to an individual prediction.
+
+**Example:**  
+![SHAP Force Plot](./docs/assets/force_plot.png)
+
+### Global Interpretability
+- SHAP summary plot provides an overview of feature importance and their impact on predictions across the dataset.
+
+**Example:**  
+![SHAP Summary Plot](./docs/assets/summary_plot.png)
+
+
 
 ## Deployment and Serving  
 
