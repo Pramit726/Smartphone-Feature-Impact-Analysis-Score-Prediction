@@ -1,7 +1,7 @@
 # Smartphone-Feature-Impact-Analysis-Score-Prediction: Project Overview  
 
 
-- Built a predictive model (**MAE: 2.18, R²: 0.95**) to quantify smartphone scores, helping **product managers** optimize product positioning.  
+- Built a predictive model (**MAE: 1.28, R²: 0.95**) to quantify smartphone scores, helping **product managers** optimize product positioning.  
 - Scraped 1000 smartphone records from Smartprix using **Python, BeautifulSoup, and Selenium**.  
 - Conducted **EDA** to analyze key factors influencing scores and preprocess data.  
 - Engineered features to refine specifications and optimize model input.  
@@ -133,7 +133,7 @@ Below are a few highlights of the EDA analysis :
 
 ### Hyperparameter Optimization  
 - Tuned **Random Forest** using **Optuna**.  
-- Achieved **MAE: 2.18, R²: 0.95** on the optimized model.  
+- Achieved **MAE: 1.28, R²: 0.95** on the optimized model.  
 
 ### Experiment Tracking  
 - Used **MLflow** for tracking experiments and model performance.  
@@ -152,9 +152,9 @@ Below are a few highlights of the EDA analysis :
 ### Advanced Models  
 | Model                   | Test Error | R² Score (Test) |
 |-------------------------|------------|-----------------|
-| Gradient Boost         | 1.2070     | 0.9523          |
-| Random Forest (Untuned) | 1.1564     | 0.9535          |
-| Random Forest (Tuned)   | **1.0800** | **0.9549**      |
+| Gradient Boost         | 1.1564     | 0.9535            |
+| Random Forest (Untuned) |      1.2070     | 0.9523   |
+| Random Forest (Tuned)   | **1.2800** | **0.9549**      |
 
 ## Model Interpretability
 
