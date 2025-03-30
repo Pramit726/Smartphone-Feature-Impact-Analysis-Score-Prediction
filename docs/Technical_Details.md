@@ -79,7 +79,7 @@ Below is the high level architecture overview:
 
 | **Layer**              | **Evaluation Strategy**                                                                             | **Key Metrics**                              |
 | ---------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| Modeling Frameworks    | Cross-validation, parameter tuning (grid search), and feature importance analysis.                  | R² (>0.8), MAE (±5 points).                  |
+| Modeling Frameworks    | Cross-validation, parameter tuning (Bayesian search), and feature importance analysis.                  | R² (>0.8), MAE (±5 points).                  |
 | Interpretability Tools | Visual inspection of SHAP plots, stakeholder feedback on interpretability.                          | SHAP value consistency, usability.           |
 | Web Application        | Usability tests with stakeholders, app responsiveness checks.                                       | Interaction time (<2 seconds).               |
 
