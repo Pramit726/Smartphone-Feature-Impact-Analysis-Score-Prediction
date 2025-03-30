@@ -185,7 +185,7 @@ Since **real-time inference** is required (FastAPI deployment), model inference 
 - **SHAP (SHapley Additive Explanations)** can be used with **Random Forest** to explain feature importance.
 - **Feature importance scores** from **Random Forest** are easier to interpret **compared to boosting models**, where feature interactions are more complex.
 
-## Deployment and Serving
+## 5. Deployment and Serving
 
 ### Model Deployment Strategy
 We deploy the model for **real-time inference** using **FastAPI** due to:  
