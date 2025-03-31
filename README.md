@@ -1,6 +1,13 @@
-# Smartphone-Feature-Impact-Analysis-Score-Prediction: Project Overview  
+# Smartphone-Feature-Impact-Analysis-Score-Prediction
 
+## Business Objective
+The goal of this project is to provide product managers and smartphone brands with data-driven insights into smartphone feature impact, enabling them to optimize pricing, marketing, and positioning strategies. By predicting smartphone scores based on specifications, stakeholders can:
 
+- Benchmark new models against competitors.
+- Identify key features that drive user preference.
+- Make informed decisions on product design and feature prioritization.
+
+## Project Overview 
 - Built a predictive model (**MAE: 1.28, R²: 0.95**) to quantify smartphone scores, helping **product managers** optimize product positioning.  
 - Scraped 1000 smartphone records from Smartprix using **Python, BeautifulSoup, and Selenium**.  
 - Conducted **EDA** to analyze key factors influencing scores and preprocess data.  
