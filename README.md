@@ -1,4 +1,4 @@
-# Smartphone-Feature-Impact-Analysis-Score-Prediction
+# Smartphone Feature Impact Analysis & Score Prediction
 
 ## Business Objective
 The goal of this project is to provide product managers and smartphone brands with data-driven insights into smartphone feature impact, enabling them to optimize pricing, marketing, and positioning strategies. By predicting smartphone scores based on specifications, stakeholders can:
