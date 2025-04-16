@@ -26,6 +26,17 @@ The goal of this project is to provide product managers and smartphone brands wi
 - **Postman Collection** → [API Testing Collection](https://crimson-equinox-345795.postman.co/workspace/My-Workspace~393a6c73-8b4d-435b-8c76-ad0f04e4d33b/collection/26974525-35da8e7e-fd28-42a2-bf07-f936d0729216?action=share&creator=26974525)
 
 
+## Screenshots
+
+![plot](./docs/assets/dashboard/Slide1.PNG)
+![plot](./docs/assets/dashboard/Slide2.PNG)
+![plot](./docs/assets/dashboard/Slide3.PNG)
+![plot](./docs/assets/dashboard/Slide4.PNG)
+![plot](./docs/assets/dashboard/Slide5.PNG)
+![plot](./docs/assets/dashboard/Slide6.PNG)
+
+
+
 ## Web Scraping 
 
 - **Source:** Extracted approximately **1000 smartphone specifications & scores** from the Smartprix website.
