@@ -1,0 +1,24 @@
+# Exported from Render on 2025-03-10T14:53:52Z
+services:
+- type: web
+  name: smartphone-spec-score-analysis-api-service-v2
+  runtime: docker
+  repo: https://github.com/Pramit726/Smartphone-Spec-Score-Analysis
+  plan: free
+  region: oregon
+  dockerContext: .
+  dockerfilePath: api.Dockerfile
+  autoDeploy: false
+- type: web
+  name: smartphone-spec-score-analysis-frontend-service-v2
+  runtime: docker
+  repo: https://github.com/Pramit726/Smartphone-Spec-Score-Analysis
+  plan: free
+  envVars:
+  - key: API_BASE_URL
+    sync: false
+  region: oregon
+  dockerContext: .
+  dockerfilePath: frontend.Dockerfile
+  autoDeploy: false
+version: "1"

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartphone-predictor-deploy
+  labels:
+    app: smartphone-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: smartphone-api
+  template:
+    metadata:
+      labels:
+        app: smartphone-api
+    spec:
+      containers:
+      - name: predictor-container
+        image: smartphone-predictor:latest
+        imagePullPolicy: Never # for local Minikube testing
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"

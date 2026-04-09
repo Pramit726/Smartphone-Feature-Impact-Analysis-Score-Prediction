@@ -1,0 +1,32 @@
+# Use a minimal base image
+FROM python:3.10-slim
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1
+
+# Install required system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends tini && rm -rf /var/lib/apt/lists/*
+
+# Copy all project files (API + frontend)
+COPY api ./api
+COPY frontend ./frontend
+COPY ml ./ml
+COPY data/processed ./data/processed
+COPY artifacts ./artifacts
+COPY setup.py pyproject.toml requirements.txt ./
+
+# Install dependencies in a single step
+RUN pip install --no-cache-dir --prefer-binary -r requirements.txt \
+    && pip install --no-cache-dir --prefer-binary -r frontend/requirements.txt
+
+# Expose API and frontend ports
+EXPOSE 8000 8501
+
+# Set tini as entrypoint
+ENTRYPOINT ["/usr/bin/tini", "--"]
+
+# Start both FastAPI and Streamlit
+CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port 8000 & exec streamlit run frontend/Home.py --server.port 8501 --server.address 0.0.0.0"]
+
+
